@@ -19,7 +19,19 @@ GET_USER() {
   fi
 }
 
+PLAY_GAME() {
+  echo -e "\nGuess the secret number between 1 and 1000:"
+
+  read USER_GUESS
+
+  MIN=1
+  MAX=1000
+  
+  RANDOM_NUMBER=$(($RANDOM%($MAX-$MIN+1)+$MIN))
+
+
+}
 
 GET_USER
-
+PLAY_GAME
 
