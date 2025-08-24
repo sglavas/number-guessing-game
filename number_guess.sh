@@ -6,6 +6,7 @@ echo -e "\n~~~ Number Guessing Game ~~~\n"
 MIN=1
 MAX=1000
 
+# generate random number between 1 and 1000
 RANDOM_NUMBER=$(($RANDOM%($MAX-$MIN+1)+$MIN))
 
 GET_USER() {
@@ -13,12 +14,16 @@ GET_USER() {
 
   read USERNAME
 
+  # get user_id
   USER_ID=$($PSQL "SELECT user_id FROM users WHERE name='$USERNAME'")
 
+  # if it doesn't exist
   if [[ -z $USER_ID ]]
   then
+    # insert new user into database
     INSERT_USERNAME_RESULT=$($PSQL "INSERT INTO users(name) VALUES('$USERNAME')")
     echo "Welcome, $USERNAME! It looks like this is your first time here."  
+  # if it exists
   else
     echo "Welcome back, $USERNAME! You have played <games_played> games, and your best game took <best_game> guesses."
   fi
@@ -34,15 +39,17 @@ PLAY_GAME() {
 
   read USER_GUESS
 
-
+  # if user_guess is greater than random_number
   if [[ $USER_GUESS -gt $RANDOM_NUMBER ]]
   then
     echo "The random number is $RANDOM_NUMBER"
     PLAY_GAME "It's lower than that, guess again:"
+  # if user_guess is less than random_number
   elif [[ $USER_GUESS -lt $RANDOM_NUMBER ]]
   then
     echo "The random number is $RANDOM_NUMBER"
     PLAY_GAME "It's higher than that, guess again:"
+  # if user_guess is equal to random_number
   else
     echo "The random number is $RANDOM_NUMBER"
     echo -e "\nYou guessed it in <number_of_guesses> tries. The secret number was <secret_number>. Nice job!"
