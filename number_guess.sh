@@ -52,6 +52,18 @@ PLAY_GAME() {
   if ! [[ "$USER_GUESS" =~ ^[0-9]+$ ]]
   then
     PLAY_GAME "That is not an integer, guess again:"
+
+  # if user_guess is greater than random_number
+  if [[ $USER_GUESS -gt $RANDOM_NUMBER ]]
+  then
+    echo "The random number is $RANDOM_NUMBER"
+    PLAY_GAME "It's lower than that, guess again:"
+  # if user_guess is less than random_number
+  elif [[ $USER_GUESS -lt $RANDOM_NUMBER ]]
+  then
+    echo "The random number is $RANDOM_NUMBER"
+    PLAY_GAME "It's higher than that, guess again:"
+  # if user_guess is equal to random_number
   else
     # if user_guess is greater than random_number
     if [[ $USER_GUESS -gt $RANDOM_NUMBER ]]
