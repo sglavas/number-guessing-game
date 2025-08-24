@@ -90,8 +90,9 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.users VALUES (2, 'test_user', NULL, NULL);
-INSERT INTO public.users VALUES (3, 'Pedro', NULL, NULL);
+INSERT INTO public.users VALUES (2, 'Pedro', 1, 11);
+INSERT INTO public.users VALUES (1, 'test_user', 4, 5);
+INSERT INTO public.users VALUES (3, 'Fabio', 2, 5);
 
 
 --
