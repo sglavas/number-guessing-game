@@ -9,6 +9,8 @@ MAX=1000
 # generate random number between 1 and 1000
 RANDOM_NUMBER=$(($RANDOM%($MAX-$MIN+1)+$MIN))
 
+GUESS_COUNTER=0
+
 GET_USER() {
   echo "Enter your username:"
 
@@ -43,16 +45,21 @@ PLAY_GAME() {
   if [[ $USER_GUESS -gt $RANDOM_NUMBER ]]
   then
     echo "The random number is $RANDOM_NUMBER"
+    GUESS_COUNTER=$(( $GUESS_COUNTER+1 ))
     PLAY_GAME "It's lower than that, guess again:"
+
   # if user_guess is less than random_number
   elif [[ $USER_GUESS -lt $RANDOM_NUMBER ]]
   then
     echo "The random number is $RANDOM_NUMBER"
+    GUESS_COUNTER=$(( $GUESS_COUNTER+1 ))
     PLAY_GAME "It's higher than that, guess again:"
+    
   # if user_guess is equal to random_number
   else
     echo "The random number is $RANDOM_NUMBER"
-    echo -e "\nYou guessed it in <number_of_guesses> tries. The secret number was <secret_number>. Nice job!"
+    GUESS_COUNTER=$(( $GUESS_COUNTER+1 ))
+    echo -e "\nYou guessed it in $GUESS_COUNTER tries. The secret number was $RANDOM_NUMBER. Nice job!"
   fi
 }
 
