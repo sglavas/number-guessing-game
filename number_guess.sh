@@ -1,7 +1,6 @@
 #!/bin/bash
 PSQL="psql --username=freecodecamp --dbname=number_guess -t --no-align -c"
 
-
 MIN=1
 MAX=1000
 
@@ -11,9 +10,7 @@ RANDOM_NUMBER=$(($RANDOM%($MAX-$MIN+1)+$MIN))
 GUESS_COUNTER=0
 
 echo "Enter your username:"
-
 read USERNAME
-
 
 GET_USER() {
   # get user_id
@@ -37,7 +34,6 @@ GET_USER() {
     echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
     echo "Guess the secret number between 1 and 1000:"
   fi
-
 }
 
 PLAY_GAME() {
@@ -46,24 +42,11 @@ PLAY_GAME() {
     echo "$1"
   fi
 
-
   read USER_GUESS
   
   if ! [[ "$USER_GUESS" =~ ^[0-9]+$ ]]
   then
     PLAY_GAME "That is not an integer, guess again:"
-
-  # if user_guess is greater than random_number
-  if [[ $USER_GUESS -gt $RANDOM_NUMBER ]]
-  then
-    echo "The random number is $RANDOM_NUMBER"
-    PLAY_GAME "It's lower than that, guess again:"
-  # if user_guess is less than random_number
-  elif [[ $USER_GUESS -lt $RANDOM_NUMBER ]]
-  then
-    echo "The random number is $RANDOM_NUMBER"
-    PLAY_GAME "It's higher than that, guess again:"
-  # if user_guess is equal to random_number
   else
     # if user_guess is greater than random_number
     if [[ $USER_GUESS -gt $RANDOM_NUMBER ]]
@@ -109,9 +92,8 @@ PLAY_GAME() {
         fi
       fi
     fi
-  fi  
+  fi
 }
 
 GET_USER
 PLAY_GAME
-
